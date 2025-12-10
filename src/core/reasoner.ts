@@ -20,15 +20,15 @@ export class Reasoner {
   buildPrompt(userQuery: string, history: string[]): string {
     const historyText = history.map(h => `- ${h}`).join("\n");
     return `你是一个遵循 ReAct 框架的智能体。
-历史:
-${historyText}
-用户问题: ${userQuery}
-请按如下格式输出：
-Thought: ...
-Action: <action name 或 none>
-Action Input: JSON
-Final Answer: 只有在完成时输出。`;
-  }
+      历史:
+      ${historyText}
+      用户问题: ${userQuery}
+      请按如下格式输出：
+      Thought: ...
+      Action: <action name 或 none>
+      Action Input: JSON
+      Final Answer: 只有在完成时输出。`;
+    }
 
   /**
    * Generates a thought/response from the LLM based on the user query and history
