@@ -6,6 +6,9 @@ import { Reasoner } from "../core/reasoner";
 import { MockLLMClient } from "../llm/mock-client";
 import { OpenAIClient } from "../llm/openai-client";
 import { KimiClient } from "../llm/kimi-client";
+import { OllamaClient } from "../llm/ollama-client";
+import { QwenClient } from "../llm/qwen-client";
+import { DeepSeekClient } from "../llm/deepseek-client";
 
 dotenv.config();
 // 加载 `.env`，用于读取 `OPENAI_API_KEY`、`PORT` 等
@@ -17,7 +20,7 @@ app.use(bodyParser.json());
 const port = process.env.PORT || 3000;
 // 端口优先使用环境变量 `PORT`，否则默认 3000
 
-// 选择 LLM：优先使用 KimiClient，然后是 OpenAIClient，最后是 Mock
+// 选择 LLM：优先使用 KimiClient，然后是 OpenAIClient，再是 QwenClient，接着是 DeepSeekClient，然后是 OllamaClient，最后是 Mock
 let llmClient: any;
 if (process.env.KIMI_API_KEY) {
   llmClient = new KimiClient(process.env.KIMI_API_KEY);
@@ -25,6 +28,18 @@ if (process.env.KIMI_API_KEY) {
 } else if (process.env.OPENAI_API_KEY) {
   llmClient = new OpenAIClient(process.env.OPENAI_API_KEY);
   console.log("Using OpenAIClient (real LLM)");
+} else if (process.env.QWEN_API_KEY) {
+  llmClient = new QwenClient(process.env.QWEN_API_KEY);
+  console.log("Using QwenClient (Alibaba Cloud)");
+} else if (process.env.DEEPSEEK_API_KEY) {
+  llmClient = new DeepSeekClient(process.env.DEEPSEEK_API_KEY);
+  console.log("Using DeepSeekClient (DeepSeek Inc.)");
+} else if (process.env.USE_OLLAMA === "true") {
+  llmClient = new OllamaClient({
+    baseURL: process.env.OLLAMA_BASE_URL,
+    defaultModel: process.env.OLLAMA_DEFAULT_MODEL
+  });
+  console.log(`Using OllamaClient with model: ${process.env.OLLAMA_DEFAULT_MODEL || "llama3"}`);
 } else {
   llmClient = new MockLLMClient();
   console.log("Using MockLLMClient (mock LLM)");
