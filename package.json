@@ -2,7 +2,7 @@
   "name": "blades-to-one",
   "version": "0.1.0",
   "private": true,
-  "description": "Blades to One React Agent",
+  "description": "万剑归宗 (blades-to-one) - 基于ReAct框架的智能体系统",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server/index.ts",
     "build": "tsc",

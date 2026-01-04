@@ -36,7 +36,7 @@ const agent = new Agent(reasoner, 6);
 
 // 添加一个欢迎页面
 app.get("/", (req, res) => {
-  res.send("Welcome to React Agent! Use POST /react/run to query.");
+  res.send("欢迎使用万剑归宗 (blades-to-one)! 使用 POST /react/run 进行查询。");
 });
 
 app.post("/react/run", async (req, res) => {
