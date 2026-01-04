@@ -1,4 +1,3 @@
-// React Agent 服务入口：基于 Express 提供 `/react/run` API
 import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
@@ -34,6 +33,11 @@ if (process.env.KIMI_API_KEY) {
 const reasoner = new Reasoner(llmClient);
 const agent = new Agent(reasoner, 6);
 // 组装推理器与代理；第二参数为最大思考步数
+
+// 添加一个欢迎页面
+app.get("/", (req, res) => {
+  res.send("Welcome to React Agent! Use POST /react/run to query.");
+});
 
 app.post("/react/run", async (req, res) => {
   try {

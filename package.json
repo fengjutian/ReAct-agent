@@ -1,7 +1,8 @@
 {
-  "name": "react-agent",
+  "name": "blades-to-one",
   "version": "0.1.0",
   "private": true,
+  "description": "Blades to One React Agent",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server/index.ts",
     "build": "tsc",
