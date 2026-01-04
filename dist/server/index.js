@@ -6,21 +6,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const dotenv_1 = __importDefault(require("dotenv"));
-const agent_1 = require("../core/agent");
-const reasoner_1 = require("../core/reasoner");
-const mock_client_1 = require("../llm/mock-client");
-const openai_client_1 = require("../llm/openai-client");
-const kimi_client_1 = require("../llm/kimi-client");
-const ollama_client_1 = require("../llm/ollama-client");
-const qwen_client_1 = require("../llm/qwen-client");
-const deepseek_client_1 = require("../llm/deepseek-client");
-const coze_client_1 = require("../llm/coze-client");
-const coze_orchestrator_1 = require("../workflow/coze-orchestrator");
+const agent_1 = require("core/agent");
+const reasoner_1 = require("core/reasoner");
+const mock_client_1 = require("llm/mock-client");
+const openai_client_1 = require("llm/openai-client");
+const kimi_client_1 = require("llm/kimi-client");
+const ollama_client_1 = require("llm/ollama-client");
+const qwen_client_1 = require("llm/qwen-client");
+const deepseek_client_1 = require("llm/deepseek-client");
+const coze_client_1 = require("llm/coze-client");
+const coze_orchestrator_1 = require("workflow/coze-orchestrator");
 const path_1 = __importDefault(require("path"));
+const pino_http_1 = __importDefault(require("pino-http"));
 dotenv_1.default.config();
 // 加载 `.env`，用于读取 `OPENAI_API_KEY`、`PORT` 等
 const app = (0, express_1.default)();
 app.use(body_parser_1.default.json());
+app.use((0, pino_http_1.default)());
 // 添加静态文件支持，用于提供Coze Studio编排页面
 app.use(express_1.default.static(path_1.default.join(__dirname, '../../public')));
 // 端口优先使用环境变量 `PORT`，否则默认 3001
@@ -71,9 +73,11 @@ const agent = new agent_1.Agent(reasoner, 6, cozeOrchestrator);
 // 组装推理器与代理；第二参数为最大思考步数
 // 添加一个欢迎页面
 app.get('/', (req, res) => {
+    req.log.info('收到欢迎页面请求');
     res.send('欢迎使用万剑归宗 (blades-to-one)! 使用 POST /react/run 进行查询。或访问 /coze-orchestration.html 使用Coze Studio服务编排页面。');
 });
 app.post('/react/run', async (req, res) => {
+    req.log.info('收到查询请求');
     try {
         const q = req.body?.query; // 读取用户问题
         if (!q)
@@ -85,4 +89,4 @@ app.post('/react/run', async (req, res) => {
         res.status(500).json({ error: e.message }); // 错误捕获
     }
 });
-app.listen(port, () => console.log(`Server listening on http://localhost:${port}`)); // 启动服务并输出访问地址
+app.listen(port, () => console.log(`Server listening on http://localhost:${port}`));

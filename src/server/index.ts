@@ -1,16 +1,16 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
-import { Agent } from '../core/agent';
-import { Reasoner } from '../core/reasoner';
-import { MockLLMClient } from '../llm/mock-client';
-import { OpenAIClient } from '../llm/openai-client';
-import { KimiClient } from '../llm/kimi-client';
-import { OllamaClient } from '../llm/ollama-client';
-import { QwenClient } from '../llm/qwen-client';
-import { DeepSeekClient } from '../llm/deepseek-client';
-import { CozeClient } from '../llm/coze-client';
-import { CozeOrchestrator } from '../workflow/coze-orchestrator';
+import { Agent } from 'core/agent';
+import { Reasoner } from 'core/reasoner';
+import { MockLLMClient } from 'llm/mock-client';
+import { OpenAIClient } from 'llm/openai-client';
+import { KimiClient } from 'llm/kimi-client';
+import { OllamaClient } from 'llm/ollama-client';
+import { QwenClient } from 'llm/qwen-client';
+import { DeepSeekClient } from 'llm/deepseek-client';
+import { CozeClient } from 'llm/coze-client';
+import { CozeOrchestrator } from 'workflow/coze-orchestrator';
 import path from 'path';
 import pinoHttp from 'pino-http';
 
@@ -104,3 +104,4 @@ app.post('/react/run', async (req, res) => {
 app.listen(port, () =>
   console.log(`Server listening on http://localhost:${port}`)
 );
+
