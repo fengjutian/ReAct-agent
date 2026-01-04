@@ -9,7 +9,8 @@
     "start": "node dist/server/index.js",
     "test": "node --loader ts-node/esm tests/basic.test.ts",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "dev:all": "concurrently \"npm run dev\" \"cd frontend && npm run dev\""
   },
   "dependencies": {
     "body-parser": "^1.20.2",
@@ -24,8 +25,10 @@
     "@types/body-parser": "^1.19.6",
     "@types/express": "^5.0.6",
     "@types/pg": "^8.16.0",
+    "concurrently": "^9.2.1",
     "prettier": "^3.7.4",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.5.0"
   }
 }
+
