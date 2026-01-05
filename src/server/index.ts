@@ -77,9 +77,7 @@ if (process.env.COZE_API_KEY) {
 
 // 组装推理器与代理；第二参数为最大思考步数，第三参数为Coze Studio服务编排器
 const agent = new Agent(reasoner, 6, cozeOrchestrator);
-// 组装推理器与代理；第二参数为最大思考步数
 
-// 添加一个欢迎页面
 app.get('/', (req, res) => {
   req.log.info('收到欢迎页面请求');
   res.send(
