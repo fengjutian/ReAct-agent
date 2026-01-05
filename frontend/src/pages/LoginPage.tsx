@@ -14,7 +14,7 @@ import { Label } from '../components/ui/label';
 const LoginPage: React.FC = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
-      <Card className="w-full max-w-sm">
+      <Card className="w-[600px]">
         <CardHeader>
           <CardTitle>登录到您的账户</CardTitle>
           <CardDescription>
@@ -55,9 +55,9 @@ const LoginPage: React.FC = () => {
           <Button type="submit" className="w-full">
             登录
           </Button>
-          <Button variant="outline" className="w-full">
+          {/* <Button variant="outline" className="w-full">
             使用Google登录
-          </Button>
+          </Button> */}
         </CardFooter>
       </Card>
     </div>
@@ -65,3 +65,4 @@ const LoginPage: React.FC = () => {
 };
 
 export default LoginPage;
+
