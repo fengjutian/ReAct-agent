@@ -1,4 +1,10 @@
-import { useState, useContext, createContext, ReactNode, useEffect } from 'react';
+import {
+  useState,
+  useContext,
+  createContext,
+  ReactNode,
+  useEffect,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authApi, AuthResponse, LoginRequest } from '../lib/api';
 
@@ -94,9 +100,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={contextValue}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
 };
 

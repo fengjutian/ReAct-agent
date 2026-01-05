@@ -25,7 +25,7 @@ export const getServerConfig = (): ServerConfig => ({
 
 export const getLLMClientConfig = (clientType: string): LLMClientConfig => {
   const config: LLMClientConfig = {};
-  
+
   switch (clientType) {
     case 'kimi':
       config.apiKey = process.env.KIMI_API_KEY;
@@ -51,7 +51,7 @@ export const getLLMClientConfig = (clientType: string): LLMClientConfig => {
     default:
       break;
   }
-  
+
   return config;
 };
 

@@ -32,9 +32,7 @@ const LoginPage: React.FC = () => {
       <Card className="w-[600px]">
         <CardHeader>
           <CardTitle>登录到您的账户</CardTitle>
-          <CardDescription>
-            请输入您的用户名和密码登录
-          </CardDescription>
+          <CardDescription>请输入您的用户名和密码登录</CardDescription>
           <div className="flex justify-end mt-2">
             <Button variant="link">注册新账户</Button>
           </div>

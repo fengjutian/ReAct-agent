@@ -10,7 +10,9 @@ const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '7d'; // 默认7天过期
  * @param payload JWT负载数据
  * @returns 生成的token字符串
  */
-export const generateToken = (payload: Omit<JwtPayload, 'exp' | 'iat'>): string => {
+export const generateToken = (
+  payload: Omit<JwtPayload, 'exp' | 'iat'>
+): string => {
   return jwt.sign(payload, JWT_SECRET, {
     expiresIn: JWT_EXPIRES_IN,
   });

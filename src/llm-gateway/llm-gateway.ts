@@ -2,7 +2,12 @@
  * LLM网关核心实现，包含token统计和限流功能
  */
 import { LLMClient } from '../core/types';
-import { LLMGateway, TokenStats, LLMRequestOptions, RateLimitConfig } from './types';
+import {
+  LLMGateway,
+  TokenStats,
+  LLMRequestOptions,
+  RateLimitConfig,
+} from './types';
 import { TokenBucket } from './token-bucket';
 import { encoding_for_model } from 'tiktoken';
 
@@ -20,10 +25,13 @@ export class LLMGatewayImpl implements LLMGateway {
    * @param llmClient 实际的LLM客户端
    * @param rateLimitConfig 限流配置
    */
-  constructor(llmClient: LLMClient, rateLimitConfig: RateLimitConfig = {
-    tokensPerSecond: 1000, // 默认每秒1000个token
-    maxBurstTokens: 5000, // 默认最大突发5000个token
-  }) {
+  constructor(
+    llmClient: LLMClient,
+    rateLimitConfig: RateLimitConfig = {
+      tokensPerSecond: 1000, // 默认每秒1000个token
+      maxBurstTokens: 5000, // 默认最大突发5000个token
+    }
+  ) {
     this.llmClient = llmClient;
     this.rateLimitConfig = rateLimitConfig;
     this.tokenBucket = new TokenBucket(
@@ -93,7 +101,10 @@ export class LLMGatewayImpl implements LLMGateway {
       const tokens = encoding.encode(text);
       return tokens.length;
     } catch (error) {
-      console.warn(`Failed to count tokens for model ${model}, using fallback.`, error);
+      console.warn(
+        `Failed to count tokens for model ${model}, using fallback.`,
+        error
+      );
       // 回退方案：假设每个token平均包含4个字符
       return Math.ceil(text.length / 4);
     }
@@ -106,7 +117,7 @@ export class LLMGatewayImpl implements LLMGateway {
    */
   getTokenStats(userId?: string): TokenStats[] {
     if (userId) {
-      return this.tokenStats.filter(stats => stats.userId === userId);
+      return this.tokenStats.filter((stats) => stats.userId === userId);
     }
     return [...this.tokenStats];
   }
@@ -117,7 +128,9 @@ export class LLMGatewayImpl implements LLMGateway {
    */
   resetTokenStats(userId?: string): void {
     if (userId) {
-      this.tokenStats = this.tokenStats.filter(stats => stats.userId !== userId);
+      this.tokenStats = this.tokenStats.filter(
+        (stats) => stats.userId !== userId
+      );
     } else {
       this.tokenStats = [];
     }
@@ -129,7 +142,10 @@ export class LLMGatewayImpl implements LLMGateway {
    */
   updateRateLimitConfig(config: RateLimitConfig): void {
     this.rateLimitConfig = config;
-    this.tokenBucket.updateConfig(config.maxBurstTokens, config.tokensPerSecond);
+    this.tokenBucket.updateConfig(
+      config.maxBurstTokens,
+      config.tokensPerSecond
+    );
   }
 }
 
@@ -145,4 +161,3 @@ export function createLLMGateway(
 ): LLMGateway {
   return new LLMGatewayImpl(llmClient, rateLimitConfig);
 }
-

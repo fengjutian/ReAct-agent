@@ -22,7 +22,7 @@ class PrismaConnectionImpl implements PrismaConnection {
   private constructor() {
     // 创建Prisma适配器
     const adapter = new PrismaBetterSqlite3({ url: 'file:./dev.db' });
-    
+
     // 创建PrismaClient实例
     this.client = new PrismaClient({
       log: ['query', 'info', 'warn', 'error'],
@@ -73,5 +73,6 @@ class PrismaConnectionImpl implements PrismaConnection {
 }
 
 // 导出Prisma连接实例和类型
-export const prismaConnection: PrismaConnection = PrismaConnectionImpl.getInstance();
+export const prismaConnection: PrismaConnection =
+  PrismaConnectionImpl.getInstance();
 export const prisma: PrismaClient = prismaConnection.client;

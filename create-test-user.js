@@ -11,8 +11,8 @@ async function createTestUser() {
       data: {
         username: 'test',
         password: hashedPassword,
-        email: 'test@example.com'
-      }
+        email: 'test@example.com',
+      },
     });
 
     console.log('测试用户创建成功:', user);

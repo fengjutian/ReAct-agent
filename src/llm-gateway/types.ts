@@ -42,13 +42,13 @@ export interface LLMGateway extends LLMClient {
    * @returns Token统计列表
    */
   getTokenStats(userId?: string): TokenStats[];
-  
+
   /**
    * 重置token统计
    * @param userId 可选的用户ID，用于重置特定用户的统计
    */
   resetTokenStats(userId?: string): void;
-  
+
   /**
    * 更新限流配置
    * @param config 新的限流配置

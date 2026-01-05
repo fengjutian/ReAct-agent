@@ -18,7 +18,7 @@ export class LLMClientFactory {
       'deepseek',
       'coze',
       'ollama',
-      'mock'
+      'mock',
     ];
 
     for (const clientType of clientTypes) {
@@ -67,7 +67,11 @@ export class LLMClientFactory {
 
       case 'coze':
         if (config.apiKey) {
-          return new CozeClient(config.apiKey, config.baseUrl, config.defaultWorkflow);
+          return new CozeClient(
+            config.apiKey,
+            config.baseUrl,
+            config.defaultWorkflow
+          );
         }
         break;
 

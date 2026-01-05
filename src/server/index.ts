@@ -17,24 +17,28 @@ import authRoutes from './auth/auth-routes';
 const app = express();
 
 // 配置CORS，允许来自前端的请求
-app.use(cors({
-  origin: 'http://localhost:5173',
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: 'http://localhost:5173',
+    credentials: true,
+  })
+);
 
 app.use(bodyParser.json());
-app.use(pinoHttp({
-  // 配置日志格式和级别
-  level: process.env.LOG_LEVEL || 'info',
-  transport: {
-    target: 'pino-pretty',
-    options: {
-      colorize: true,
-      translateTime: 'SYS:standard',
-      ignore: 'pid,hostname',
+app.use(
+  pinoHttp({
+    // 配置日志格式和级别
+    level: process.env.LOG_LEVEL || 'info',
+    transport: {
+      target: 'pino-pretty',
+      options: {
+        colorize: true,
+        translateTime: 'SYS:standard',
+        ignore: 'pid,hostname',
+      },
     },
-  },
-}));
+  })
+);
 
 // 静态文件服务
 app.use(express.static(getPublicPath()));
@@ -47,7 +51,9 @@ const serverConfig = getServerConfig();
 
 // 创建LLM客户端
 const { client: llmClient, type: clientType } = LLMClientFactory.createClient();
-console.log(`Using ${clientType.charAt(0).toUpperCase() + clientType.slice(1)}Client`);
+console.log(
+  `Using ${clientType.charAt(0).toUpperCase() + clientType.slice(1)}Client`
+);
 
 // 初始化LLM网关
 const llmGateway = new LLMGatewayImpl(llmClient, {

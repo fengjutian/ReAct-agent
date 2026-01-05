@@ -17,12 +17,17 @@ const App: React.FC = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/workbench" element={<Workbench />} />
-          <Route path="/home" element={<div>
-            <h1>Vite + React + TypeScript</h1>
-            <div className="card">
-              <Counter />
-            </div>
-          </div>} />
+          <Route
+            path="/home"
+            element={
+              <div>
+                <h1>Vite + React + TypeScript</h1>
+                <div className="card">
+                  <Counter />
+                </div>
+              </div>
+            }
+          />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

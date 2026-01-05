@@ -1,5 +1,10 @@
 import { prisma } from '../../db';
-import { LoginRequest, RegisterRequest, AuthResponse, JwtPayload } from './types';
+import {
+  LoginRequest,
+  RegisterRequest,
+  AuthResponse,
+  JwtPayload,
+} from './types';
 import { generateToken } from './token-utils';
 import bcrypt from 'bcryptjs';
 
@@ -21,10 +26,10 @@ export class AuthService {
       include: {
         userPermissions: {
           include: {
-            permission: true
-          }
-        }
-      }
+            permission: true,
+          },
+        },
+      },
     });
 
     if (!user) {
@@ -126,9 +131,9 @@ export class AuthService {
       include: {
         userPermissions: {
           include: {
-            permission: true
-          }
-        }
+            permission: true,
+          },
+        },
       },
       select: {
         id: true,
@@ -139,12 +144,12 @@ export class AuthService {
           select: {
             permission: {
               select: {
-                name: true
-              }
-            }
-          }
-        }
-      }
+                name: true,
+              },
+            },
+          },
+        },
+      },
     });
 
     if (!user) {
@@ -157,5 +162,3 @@ export class AuthService {
 
 // 导出认证服务实例
 export const authService = new AuthService();
-
-
