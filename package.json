@@ -4,7 +4,7 @@
   "private": true,
   "description": "万剑归宗 (blades-to-one) - 基于ReAct框架的智能体系统",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/server/index.ts",
+    "dev": "ts-node-dev --respawn --transpile-only --project tsconfig.json src/server/index.ts",
     "build": "tsc",
     "start": "node dist/server/index.js",
     "test": "node --loader ts-node/esm tests/basic.test.ts",
@@ -21,7 +21,8 @@
     "openai": "^4.0.0",
     "pg": "^8.16.3",
     "pino": "^10.1.0",
-    "pino-http": "^11.0.0"
+    "pino-http": "^11.0.0",
+    "tiktoken": "^1.0.22"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.6",
