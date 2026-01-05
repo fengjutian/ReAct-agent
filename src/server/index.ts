@@ -9,6 +9,9 @@ import { getServerConfig, getPublicPath, getLLMClientConfig } from './config';
 import { LLMClientFactory } from './llm-client-factory';
 import { createRoutes } from './routes';
 
+// 导入认证路由
+import authRoutes from './auth/auth-routes';
+
 // 初始化应用
 const app = express();
 app.use(bodyParser.json());
@@ -27,6 +30,9 @@ app.use(pinoHttp({
 
 // 静态文件服务
 app.use(express.static(getPublicPath()));
+
+// 注册认证路由
+app.use('/api/auth', authRoutes);
 
 // 获取服务器配置
 const serverConfig = getServerConfig();
