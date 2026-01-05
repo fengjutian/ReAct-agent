@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
+import { Button } from './ui/button';
 
 const Counter: React.FC = () => {
   const [count, setCount] = useState(0);
 
   return (
-    <button 
+    <Button
       onClick={() => setCount(count + 1)}
-      type="button"
+      variant="default"
+      size="lg"
     >
       count is {count}
-    </button>
+    </Button>
   );
 };
 
