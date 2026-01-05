@@ -2,7 +2,6 @@ import React from 'react';
 import { Button } from '../components/ui/button';
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
   CardFooter,
@@ -21,9 +20,9 @@ const LoginPage: React.FC = () => {
           <CardDescription>
             请输入您的邮箱和密码登录
           </CardDescription>
-          <CardAction>
+          <div className="flex justify-end mt-2">
             <Button variant="link">注册新账户</Button>
-          </CardAction>
+          </div>
         </CardHeader>
         <CardContent>
           <form>
