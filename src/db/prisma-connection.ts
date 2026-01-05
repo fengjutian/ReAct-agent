@@ -1,7 +1,6 @@
 // 导入PrismaClient和相关类型
 import { PrismaClient } from '../generated/prisma/client';
 import dotenv from 'dotenv';
-import { join } from 'path';
 import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3';
 
 // 加载环境变量
@@ -21,12 +20,9 @@ class PrismaConnectionImpl implements PrismaConnection {
   public client: PrismaClient;
 
   private constructor() {
-    // 获取数据库文件路径
-    const dbPath = join(process.cwd(), 'prisma', 'dev.db');
-
     // 创建Prisma适配器
-    const adapter = new PrismaBetterSqlite3({ url: `file:${dbPath}` });
-
+    const adapter = new PrismaBetterSqlite3({ url: 'file:./dev.db' });
+    
     // 创建PrismaClient实例
     this.client = new PrismaClient({
       log: ['query', 'info', 'warn', 'error'],
@@ -79,4 +75,3 @@ class PrismaConnectionImpl implements PrismaConnection {
 // 导出Prisma连接实例和类型
 export const prismaConnection: PrismaConnection = PrismaConnectionImpl.getInstance();
 export const prisma: PrismaClient = prismaConnection.client;
-

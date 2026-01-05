@@ -92,24 +92,7 @@ export class AuthService {
         username,
         password: hashedPassword,
         email,
-        // 默认给新用户分配'user'权限
-        userPermissions: {
-          create: [
-            {
-              permission: {
-                connect: { name: 'user' } // 假设已存在'user'权限
-              }
-            }
-          ]
-        }
       },
-      include: {
-        userPermissions: {
-          include: {
-            permission: true
-          }
-        }
-      }
     });
 
     // 生成JWT token
@@ -174,4 +157,5 @@ export class AuthService {
 
 // 导出认证服务实例
 export const authService = new AuthService();
+
 
